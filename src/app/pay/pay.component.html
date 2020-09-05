@@ -1,0 +1,75 @@
+<div class="container h-100">
+  <div class="row h-100">
+    <div class="col-xl-6 offset-xl-3 col-12 helper-div">
+      <span class="helper"></span>
+      <div class="vertical-center shadow" style="height: fit-content;">
+
+
+        <form [formGroup]="payForm" (ngSubmit)="payNow()" class="p-5">
+
+
+          <h1 class="display-2">We Accept</h1>
+          <img src="https://i.ytimg.com/vi/i09C02151PI/maxresdefault.jpg" alt="Credit Cards" class="w-100">
+
+          <!-- Name -->
+          <div class="form-group mb-3">
+            <label for="name">Full Name</label>
+            <input type="text" class="form-control" id="name" formControlName="cardHolder" placeholder="Full Name...">
+            <span class="text-white bg-danger mb-2 pl-2 pr-2"
+              *ngIf="!payForm.get('cardHolder').valid && payForm.get('cardHolder').touched">Name Can't be
+              empty</span>
+          </div>
+
+          <!-- Number -->
+          <div class="form-group mb-3">
+            <label for="number">Credit Card Number</label>
+            <input type="tel" class="form-control" id="number" formControlName="creditCardNumber"
+              placeholder="xxxxxxxxx">
+            <span class="text-white bg-danger mb-2 pl-2 pr-2"
+              *ngIf="!payForm.get('creditCardNumber').valid && payForm.get('creditCardNumber').touched">Credit
+              Card Number is invalid</span>
+          </div>
+
+          <!-- Expiry -->
+          <div class="form-group mb-3">
+            <label for="expiry">Expiration Date <span class="text-muted">( format of MM/YY or MM/YYYY )</span></label>
+            <input type="tel" class="form-control" id="expiry" formControlName="expirationDate" placeholder="MM/YY">
+            <span class="text-white bg-danger mb-2 pl-2 pr-2"
+              *ngIf="!payForm.get('expirationDate').valid && payForm.get('expirationDate').touched">Invalid</span>
+          </div>
+
+
+          <!-- CVV -->
+          <div class="form-group mb-3">
+            <label for="cvv">CVV</label>
+            <input type="tel" class="form-control" id="cvv" formControlName="securityCode" placeholder="xxx">
+            <span class="text-white bg-danger mb-2 pl-2 pr-2"
+              *ngIf="!payForm.get('securityCode').valid && payForm.get('securityCode').touched">Invalid</span>
+          </div>
+
+          <!-- Amount -->
+          <div class="form-group mb-3">
+            <label for="amount">Amount in Your Local Cuurency</label>
+            <input type="number" class="form-control" id="amount" formControlName="amount" min="1" placeholder="5800">
+            <span class="text-white bg-danger mb-2 pl-2 pr-2"
+              *ngIf="!payForm.get('amount').valid && payForm.get('amount').touched">Amount Can't be
+              empty</span>
+          </div>
+
+
+          <!-- Message -->
+          <div class="form-group mb-3">
+            <p *ngIf="successMessage" class="text-success">{{ successMessage }}</p>
+            <p *ngIf="failureMessage" class="text-danger">{{ failureMessage }}</p>
+          </div>
+
+          <!-- Submit Button -->
+          <button mat-raised-button color="primary" class="w-100" [disabled]="disabled"><span *ngIf="!disabled">Pay
+              Now</span> <span *ngIf="disabled">Please Wait....</span></button>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
